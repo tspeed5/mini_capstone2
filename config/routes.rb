@@ -10,6 +10,16 @@ Rails.application.routes.draw do
     # create a new product
     post '/products' => 'products#create'
     # update an existing product
+
+    post '/users' => 'users#create'
+    post '/sessions' => 'sessions#create'
+
+    # get '/orders/' => 'orders#index'
+    get '/orders/:id' => 'orders#show'
+    post '/orders' => 'orders#create'
+    
+
+
     
   end
 

@@ -1,14 +1,33 @@
 class Api::ProductsController < ApplicationController
- def index
-    search = params[:search]
-    if search
-      @products = Product.where('name LIKE ?', "%#{search}%").order(:id => :asc) 
-    else
-      @products = Product.all.order(:id => :asc)
-    end
+ # def index
+ #    search = params[:search]
+ #    if search
+ #      @products = Product.where('name LIKE ?', "%#{search}%").order(:id => :asc) 
+ #    else
+ #      @products = Product.all.order(:id => :asc)
+ #    end
 
-    # @products = Product.all
-    render "index.json.jbuilder"
+ #  #   if params [:category]
+ #  #     category = Category.find_by(name:params[:category])
+ #  #     @products = category.products
+ #  #   else
+ #  #     @products = Product.all
+ #  #   end
+
+ #  #   # @products = Product.all
+ #  #   render "index.json.jbuilder"
+ #  end
+
+   def index
+    if params[:category]
+     
+      category = Category.find_by(name: params[:category])
+     
+      @products = category.products
+    else
+      @products = Product.all
+    end
+    render 'index.json.jbuilder'
   end
 
   def show
@@ -26,5 +45,9 @@ class Api::ProductsController < ApplicationController
         )
     @product1.save
     render "create.json.jbuilder"
+
+
+
+
   end
 end
